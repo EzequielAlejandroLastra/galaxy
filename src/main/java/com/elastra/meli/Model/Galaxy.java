@@ -11,15 +11,15 @@ public class Galaxy implements Serializable{
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="PLANET_ID")
+    @JoinColumn(name="PLANET_1")
     private Planet vulcano;
 
     @ManyToOne
-    @JoinColumn(name="PLANET_ID")
+    @JoinColumn(name="PLANET_2")
     private Planet Ferengis;
 
     @ManyToOne
-    @JoinColumn(name="PLANET_ID")
+    @JoinColumn(name="PLANET_3")
     private Planet Betasoides;
 
     public Galaxy(Planet vulcano, Planet ferengis, Planet betasoides) {

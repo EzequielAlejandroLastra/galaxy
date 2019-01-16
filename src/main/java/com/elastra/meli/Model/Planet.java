@@ -8,7 +8,7 @@ public class Planet implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    private Long planetId;
 
     @Column(name = "CIVILIZATION")
     private String civilization;
@@ -22,6 +22,9 @@ public class Planet implements Serializable {
     @Transient
     private Double angle;
 
+    public Planet() {
+    }
+
     public Planet(String civilization, Double angularVelocity, Double radious, Double angle) {
         this.civilization = civilization;
         this.angularVelocity = angularVelocity;
@@ -30,11 +33,11 @@ public class Planet implements Serializable {
     }
 
     public Long getId() {
-        return id;
+        return planetId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.planetId = id;
     }
 
     public String getCivilization() {
@@ -67,5 +70,16 @@ public class Planet implements Serializable {
 
     public void setAngle(Double angle) {
         this.angle = angle;
+    }
+
+    @Override
+    public String toString() {
+        return "Planet{" +
+                "planetId=" + planetId +
+                ", civilization='" + civilization + '\'' +
+                ", angularVelocity=" + angularVelocity +
+                ", radious=" + radious +
+                ", angle=" + angle +
+                '}';
     }
 }

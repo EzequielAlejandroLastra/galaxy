@@ -1,21 +1,23 @@
 package com.elastra.meli.Model;
 
+import com.elastra.meli.Model.Enum.ConditionType;
+
 import javax.persistence.*;
 
 @Entity
-public class weatherCondition {
+public class WeatherCondition {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
     @Column(name = "DESC")
-    private String description;
+    private ConditionType description;
 
     @Column(name = "TYPE")
     private String type;
 
-    public weatherCondition(String description, String type) {
+    public WeatherCondition(ConditionType description, String type) {
         this.description = description;
         this.type = type;
     }
@@ -28,11 +30,11 @@ public class weatherCondition {
         this.id = id;
     }
 
-    public String getDescription() {
+    public ConditionType getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(ConditionType description) {
         this.description = description;
     }
 

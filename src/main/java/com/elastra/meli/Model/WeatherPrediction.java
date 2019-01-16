@@ -3,7 +3,11 @@ package com.elastra.meli.Model;
 import javax.persistence.*;
 
 @Entity
-public class weatherPrediction {
+public class WeatherPrediction {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long weatherPredictionId;
 
     @ManyToOne
     @JoinColumn(name="GALAXY_ID")
@@ -14,12 +18,21 @@ public class weatherPrediction {
 
     @ManyToOne
     @JoinColumn(name="CONDITION_ID")
-    private weatherCondition type;
+    private WeatherCondition type;
 
-    public weatherPrediction(Galaxy galaxy, long day, weatherCondition type) {
+
+    public WeatherPrediction(Galaxy galaxy, long day, WeatherCondition type) {
         this.galaxy = galaxy;
         this.day = day;
         this.type = type;
+    }
+
+    public Long getWeatherPredictionId() {
+        return weatherPredictionId;
+    }
+
+    public void setWeatherPredictionId(Long weatherPredictionId) {
+        this.weatherPredictionId = weatherPredictionId;
     }
 
     public Galaxy getGalaxy() {
@@ -38,11 +51,11 @@ public class weatherPrediction {
         this.day = day;
     }
 
-    public weatherCondition getType() {
+    public WeatherCondition getType() {
         return type;
     }
 
-    public void setType(weatherCondition type) {
+    public void setType(WeatherCondition type) {
         this.type = type;
     }
 }
