@@ -72,6 +72,11 @@ public class Planet implements Serializable {
         this.angle = angle;
     }
 
+
+    public Double simulateOneDayMovement(){
+        return (this.angle += this.angularVelocity);
+    }
+
     @Override
     public String toString() {
         return "Planet{" +

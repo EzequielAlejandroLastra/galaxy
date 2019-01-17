@@ -22,6 +22,8 @@ public class WeatherCondition {
         this.type = type;
     }
 
+    public WeatherCondition() {}
+
     public Long getId() {
         return id;
     }
