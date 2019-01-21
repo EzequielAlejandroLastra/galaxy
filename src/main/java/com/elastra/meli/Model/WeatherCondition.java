@@ -1,25 +1,27 @@
 package com.elastra.meli.Model;
 
-import com.elastra.meli.Model.Enum.ConditionType;
-
 import javax.persistence.*;
+import java.util.Objects;
 
-@Entity
+@Entity(name = "WEATHER_CONDITION")
 public class WeatherCondition {
 
     @Id
+    @Column(name = "WEATHER_CONDITION_ID")
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
     @Column(name = "DESC")
-    private ConditionType description;
+    private String description;
 
+    /*
     @Column(name = "TYPE")
     private String type;
+    */
 
-    public WeatherCondition(ConditionType description, String type) {
+    public WeatherCondition(Long id, String description) {
+        this.id = id;
         this.description = description;
-        this.type = type;
     }
 
     public WeatherCondition() {}
@@ -32,19 +34,33 @@ public class WeatherCondition {
         this.id = id;
     }
 
-    public ConditionType getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(ConditionType description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public String getType() {
-        return type;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WeatherCondition that = (WeatherCondition) o;
+        return Objects.equals(id, that.id) &&
+                description == that.description;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, description);
+    }
+
+    @Override
+    public String toString() {
+        return "WeatherCondition{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

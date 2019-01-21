@@ -2,11 +2,13 @@ package com.elastra.meli.Model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
-@Entity
+@Entity(name = "GALAXY")
 public class Galaxy implements Serializable{
 
     @Id
+    @Column(name = "GALAXY_ID")
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
@@ -21,6 +23,10 @@ public class Galaxy implements Serializable{
     @ManyToOne
     @JoinColumn(name="PLANET_3")
     private Planet Betasoides;
+
+
+    public Galaxy() {
+    }
 
     public Galaxy(Planet vulcano, Planet ferengis, Planet betasoides) {
         this.vulcano = vulcano;
@@ -60,6 +66,20 @@ public class Galaxy implements Serializable{
         Betasoides = betasoides;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Galaxy galaxy = (Galaxy) o;
+        return Objects.equals(id, galaxy.id) &&
+                Objects.equals(vulcano, galaxy.vulcano) &&
+                Objects.equals(Ferengis, galaxy.Ferengis) &&
+                Objects.equals(Betasoides, galaxy.Betasoides);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, vulcano, Ferengis, Betasoides);
+    }
 }
 

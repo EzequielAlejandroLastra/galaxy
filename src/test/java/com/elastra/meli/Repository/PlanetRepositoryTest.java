@@ -21,15 +21,15 @@ public class PlanetRepositoryTest {
 
     @Test
     public void plantetLoad(){
-        Planet ferengi = planetRepository.findById(1L).get();
+        Planet ferengi = planetRepository.findOne(1L);
         assertThat(ferengi != null, Is.is(true));
         assertThat("FERENGI".equals(ferengi.getCivilization()), Is.is(true));
 
-        Planet vulcano = planetRepository.findById(2L).get();
+        Planet vulcano = planetRepository.findOne(2L);
         assertThat(vulcano != null, Is.is(true));
         assertThat("VULCANO".equals(vulcano.getCivilization()), Is.is(true));
 
-        Planet betasoide = planetRepository.findById(3L).get();
+        Planet betasoide = planetRepository.findOne(3L);
         assertThat(betasoide != null, Is.is(true));
         assertThat("BETASOIDE".equals(betasoide.getCivilization()), Is.is(true));
 

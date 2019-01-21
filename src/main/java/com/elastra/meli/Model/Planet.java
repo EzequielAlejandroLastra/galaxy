@@ -1,14 +1,25 @@
 package com.elastra.meli.Model;
 
+import com.elastra.meli.Processor.PredictAndPersistProccesor;
+import com.elastra.meli.Utils.RoundingUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
-@Entity
+@Entity(name = "PLANET")
 public class Planet implements Serializable {
 
+    private static Double EXTREME = 360D;
+    private static Double DAY_OF_YEAR = 365D;
+    private static final Logger logger = LoggerFactory.getLogger(PredictAndPersistProccesor.class);
+
     @Id
+    @Column(name = "PLANET_ID")
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long planetId;
+    private Long id;
 
     @Column(name = "CIVILIZATION")
     private String civilization;
@@ -20,24 +31,15 @@ public class Planet implements Serializable {
     private Double radious;
 
     @Transient
-    private Double angle;
+    private double angle;
 
-    public Planet() {
+
+    public Long id() {
+        return id;
     }
 
-    public Planet(String civilization, Double angularVelocity, Double radious, Double angle) {
-        this.civilization = civilization;
-        this.angularVelocity = angularVelocity;
-        this.radious = radious;
-        this.angle = angle;
-    }
-
-    public Long getId() {
-        return planetId;
-    }
-
-    public void setId(Long id) {
-        this.planetId = id;
+    public void id(Long id) {
+        this.id = id;
     }
 
     public String getCivilization() {
@@ -74,17 +76,36 @@ public class Planet implements Serializable {
 
 
     public Double simulateOneDayMovement(){
-        return (this.angle += this.angularVelocity);
+        this.angle = this.angle >= EXTREME ? this.angle -= EXTREME : this.angle;
+        this.angle = this.angle <= -EXTREME ? this.angle += EXTREME : this.angle;
+        this.angle += this.angularVelocity;
+        //System.out.println("ANGLE = " + this.angle);
+        return this.angle;
+    }
+
+    public Double calculateInitialPositionForYear(int year){
+        Double daysToCompleteTurning = RoundingUtil.getRoundedNumberHalfUp(EXTREME / this.angularVelocity, 2);
+        Double initialAngleForYear = (DAY_OF_YEAR % daysToCompleteTurning) * this.angularVelocity;
+        this.angle = initialAngleForYear * (year-1);
+        return this.angle;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Planet planet = (Planet) o;
+        return Objects.equals(id, planet.id) &&
+                Objects.equals(civilization, planet.civilization) &&
+                Objects.equals(angularVelocity, planet.angularVelocity) &&
+                Objects.equals(radious, planet.radious) &&
+                Objects.equals(angle, planet.angle);
     }
 
     @Override
-    public String toString() {
-        return "Planet{" +
-                "planetId=" + planetId +
-                ", civilization='" + civilization + '\'' +
-                ", angularVelocity=" + angularVelocity +
-                ", radious=" + radious +
-                ", angle=" + angle +
-                '}';
+    public int hashCode() {
+        return Objects.hash(id, civilization, angularVelocity, radious, angle);
     }
+
 }

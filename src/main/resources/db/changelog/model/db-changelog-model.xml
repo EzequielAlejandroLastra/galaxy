@@ -87,6 +87,9 @@
             <column name="DAY" type="int" >
                 <constraints nullable="false"/>
             </column>
+            <column name="YEAR" type="int" >
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <addForeignKeyConstraint constraintName="fk_PLANET_PLANET_POSITION"
@@ -102,7 +105,7 @@
             </not>
         </preConditions>
         <createTable tableName="WEATHER_CONDITION">
-            <column name="WEATHER_CONDITION_ID" type="bigint" autoIncrement="true">
+            <column name="WEATHER_CONDITION_ID" type="bigint">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="DESC" type="varchar(255)">
@@ -133,6 +136,10 @@
             <column name="WEATHER_CONDITION_ID" type="bigint">
                 <constraints nullable="false"/>
             </column>
+            <column name="PERIMETER" type="decimal(19,4)" >
+                <constraints nullable="true"/>
+            </column>
+
         </createTable>
 
         <addForeignKeyConstraint constraintName="fk_WEATHER_PREDICTION_GALAXY"

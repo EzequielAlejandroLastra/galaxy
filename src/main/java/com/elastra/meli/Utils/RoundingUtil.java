@@ -6,6 +6,7 @@ import java.math.RoundingMode;
 public class RoundingUtil {
 
     public static Double getRoundedNumberHalfUp(Double number, int decimals) {
+        //System.out.println("NUMERO A REDONDEAR " + number);
         return new BigDecimal(number).setScale(decimals, RoundingMode.HALF_UP).doubleValue();
     }
 
