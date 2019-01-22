@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 @FunctionalInterface
 public interface CoordinatesCalculator {
 
-    double calculate(PlanetPosition p1, PlanetPosition p2, PlanetPosition p3);
+    Double calculate(PlanetPosition p1, PlanetPosition p2, PlanetPosition p3);
 
 
     // TODO Revisar ----->
@@ -64,7 +64,8 @@ public interface CoordinatesCalculator {
      * @return zero if planet coordinates are aligned.
      */
     static CoordinatesCalculator areAligned() {
-        return (p1, p2, p3) -> ((p2.getAxisX() - p1.getAxisX()) * (p3.getAxisY() - p2.getAxisY()) - ((p2.getAxisY() - p1.getAxisY()) * (p3.getAxisX() - p2.getAxisX())));
+        return (p1, p2, p3) ->
+                Math.abs(p2.getAxisX() - p1.getAxisX()) * (p3.getAxisY() - p2.getAxisY()) - ((p2.getAxisY() - p1.getAxisY()) * (p3.getAxisX() - p2.getAxisX()));
     }
 
 
