@@ -72,24 +72,28 @@ public class WeatherPredictionServiceImpl implements WeatherPredictionService {
     }
 
     @Override
-    public void calculateAndPesistPredictions(int years) {
+    public String calculateAndPesistPredictions(int years) {
+        try {
+            Planet ferengi = planetRepository.findOne(FERENGI);
+            Planet vulcano = planetRepository.findOne(VULCANO);
+            Planet betasoide = planetRepository.findOne(BETASOIDE);
+            executor.initialize();
 
-        Planet ferengi = planetRepository.findOne(FERENGI);
-        Planet vulcano = planetRepository.findOne(VULCANO);
-        Planet betasoide = planetRepository.findOne(BETASOIDE);
-        executor.initialize();
+            IntStream.range(1,years).forEach(i -> {
+                PredictAndPersistProccesor proccesor = procesorBuilder(ferengi, vulcano, betasoide, i);
 
-        IntStream.range(1,years).forEach(i -> {
-            PredictAndPersistProccesor proccesor = procesorBuilder(ferengi, vulcano, betasoide, i);
+                executor.execute(proccesor);
+            });
+            executor.shutdown();
 
-            executor.execute(proccesor);
-        });
-        executor.shutdown();
+            Double maxPerimeter = weatherPredictionRepository.findMaxPerimeter();
+            weatherPredictionRepository.updateConditionByPerimeter(maxPerimeter);
+        }catch (Exception e){
+            return "Proceso de Generacion de Predicciones Fallo, Por favor comuniquese con el Desarrollador";
+        }finally {
+            return  "Proceso Finalizado Exitosamente!!!";
+        }
 
-        Double maxPerimeter = weatherPredictionRepository.findMaxPerimeter();
-        System.out.println("PERIMETRO MAXIMO" + maxPerimeter);
-
-        weatherPredictionRepository.updateConditionByPerimeter(maxPerimeter);
     }
 
     @Override

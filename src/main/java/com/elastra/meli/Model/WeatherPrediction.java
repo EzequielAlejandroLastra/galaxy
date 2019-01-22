@@ -96,13 +96,7 @@ public class WeatherPrediction {
 
     @Override
     public String toString() {
-        return "WeatherPrediction{" +
-                "id=" + id +
-                ", galaxy=" + galaxy.getId() +
-                ", day=" + day +
-                ", type=" + type +
-                ", perimeter=" + perimeter +
-                '}';
+        return " Dia = " + day + ", Clima = " + type.getDescription();
     }
 }
 

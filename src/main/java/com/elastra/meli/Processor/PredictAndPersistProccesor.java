@@ -66,11 +66,9 @@ public class PredictAndPersistProccesor implements Runnable, Cloneable {
 
             WeatherPrediction weatherPrediction = weatherPredictionService.
                     generateWeatherPrediction(planetPositionFerengi, planetPositionVulcano, planetPositionBetasoide, i);
-           // System.out.println("WEATHER PREDICTION " + weatherPrediction.toString());
             predictionList.add(weatherPrediction);
 
             if ((i == ((DAY_OF_YEAR * year) ))) {
-                System.out.println("WEATHER PREDICTION PERSIST " + predictionList.size());
                 planetPositionService.persistList(planetPositionList);
                 weatherPredictionService.presistPredictions(predictionList);
             }

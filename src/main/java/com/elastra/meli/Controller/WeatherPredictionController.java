@@ -1,6 +1,5 @@
 package com.elastra.meli.Controller;
 
-import com.elastra.meli.Model.WeatherPrediction;
 import com.elastra.meli.Service.WeatherPredictionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,8 +17,8 @@ public class WeatherPredictionController {
 
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,path = "/get-prediction/{day}")
-    public WeatherPrediction findWeatherpredictionByDay(@PathVariable(value = "day") Long day) throws Exception {
-        if (day != null) return weatherPredictionService.findPredictionByDay(day);
+    public String findWeatherpredictionByDay(@PathVariable(value = "day") Long day) throws Exception {
+        if (day != null) return weatherPredictionService.findPredictionByDay(day).toString();
         else {
             throw new Exception("El dia ingresado no puede ser nulo o vacio");
         }

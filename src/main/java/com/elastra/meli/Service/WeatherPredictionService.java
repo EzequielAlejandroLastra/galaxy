@@ -10,7 +10,7 @@ public interface WeatherPredictionService {
     WeatherPrediction findPredictionByDay(Long day);
     List<WeatherPrediction> presistPredictions(List<WeatherPrediction> list);
     WeatherPrediction generateWeatherPrediction(PlanetPosition pp1, PlanetPosition pp2, PlanetPosition pp3, long day);
-    void calculateAndPesistPredictions(int years);
+    String calculateAndPesistPredictions(int years);
     List<WeatherPrediction> getPredictions();
 
 }

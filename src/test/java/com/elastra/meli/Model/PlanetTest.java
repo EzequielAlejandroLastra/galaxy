@@ -23,8 +23,6 @@ public class PlanetTest {
 
         Double position = planet.calculateInitialPositionForYear(4);
 
-        System.out.println();
-        System.out.println("POSITION = " + RoundingUtil.getRoundedNumberHalfUp(position,4));
 
 
 

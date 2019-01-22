@@ -79,7 +79,6 @@ public class Planet implements Serializable {
         this.angle = this.angle >= EXTREME ? this.angle -= EXTREME : this.angle;
         this.angle = this.angle <= -EXTREME ? this.angle += EXTREME : this.angle;
         this.angle += this.angularVelocity;
-        //System.out.println("ANGLE = " + this.angle);
         return this.angle;
     }
 
