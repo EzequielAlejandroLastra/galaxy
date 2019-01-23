@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -31,21 +29,10 @@ public class PlanetPositionServiceImpl implements PlanetPositionService {
 
 
     @Override
-    public void report(Long id) {
-        List<PlanetPosition> list = planetPositionRepository.findAllByOrderByDayAsc();
-        Collections.sort(list,new ComparatorPosition());
+    public List<PlanetPosition> getAllPlanetPositions() {
+        return planetPositionRepository.findAllByOrderByDayAsc();
 
-        for (PlanetPosition p : list) {
-            System.out.println(p.toString());
-        }
     }
 
-    public class ComparatorPosition implements Comparator<PlanetPosition>{
-
-        @Override
-        public int compare(PlanetPosition o1, PlanetPosition o2) {
-            return (int) (o1.getDay() < o2.getDay() ? o1.getDay() : o2.getDay()) ;
-        }
-    }
 
 }

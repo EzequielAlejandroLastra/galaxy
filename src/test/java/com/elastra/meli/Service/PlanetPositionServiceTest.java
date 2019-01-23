@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -21,17 +23,18 @@ public class PlanetPositionServiceTest {
     @Autowired
     PlanetPositionService planetPositionService;
 
-    @Test
-    public void saveListPlanetPosition(){
+    @Autowired
+    WeatherPredictionService weatherPredictionService;
 
-        List<PlanetPosition> list = new ArrayList<PlanetPosition>();
-        int year = 5;
-        //planetPositionService.calculateCoordinatesInNYears(year);
-        planetPositionService.report(1L);
-        System.out.println("-------------");
-        planetPositionService.report(2L);
-        System.out.println("-------------");
-        planetPositionService.report(3L);
-        logger.info("TERMINO");
+
+    @Test
+    public void when_run_calculateAndPesistPredictions_with_ten_years_should_persist_3650_registers(){
+
+        int year = 10;
+        weatherPredictionService.calculateAndPesistPredictions(year);
+        List<PlanetPosition> list = planetPositionService.getAllPlanetPositions();
+
+        assertThat(list.size(), is(10950));
+
     }
 }

@@ -11,6 +11,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class WeatherPredictionServiceTest {
@@ -22,21 +26,13 @@ public class WeatherPredictionServiceTest {
     WeatherPredictionService weatherPredictionService;
 
     @Test
-    public void saveListPlanetPosition(){
+    public void when_run_calculateAndPesistPredictions_with_ten_years_should_persist_3650_registers(){
 
         int year = 10;
         weatherPredictionService.calculateAndPesistPredictions(year);
         List<WeatherPrediction> list = weatherPredictionService.getPredictions();
 
-        for (WeatherPrediction p: list) {
-            System.out.println(p.toString());
-        }
+        assertThat(list.size(), is(3650));
 
-        planetPositionService.report(1L);
-        System.out.println("-------------");
-       /* planetPositionService.report(2L);
-        System.out.println("-------------");
-        planetPositionService.report(3L);*/
-        //logger.info("TERMINO");
     }
 }
