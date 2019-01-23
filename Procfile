@@ -1,1 +1,1 @@
-web: java -jar build/libs/meli.jar
+web: java -Dserver.port$PORT $JAVA_OPTS -jar build/libs/meli.jar
