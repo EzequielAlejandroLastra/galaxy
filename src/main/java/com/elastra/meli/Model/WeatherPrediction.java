@@ -98,6 +98,8 @@ public class WeatherPrediction {
     public String toString() {
         return " Dia = " + day + ", Clima = " + type.getDescription();
     }
+
+
 }
 
 

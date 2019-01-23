@@ -32,9 +32,9 @@ public class WeatherPredictionServiceTest {
             System.out.println(p.toString());
         }
 
-       /* planetPositionService.report(1L);
+        planetPositionService.report(1L);
         System.out.println("-------------");
-        planetPositionService.report(2L);
+       /* planetPositionService.report(2L);
         System.out.println("-------------");
         planetPositionService.report(3L);*/
         //logger.info("TERMINO");

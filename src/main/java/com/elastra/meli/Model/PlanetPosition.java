@@ -159,7 +159,7 @@ public class PlanetPosition {
         }
 
         private long calculateYear() {
-            return ((this.d - 1) / 365);
+            return (((this.d - 1) / 365) +1);
         }
 
 

@@ -76,8 +76,8 @@ public class Planet implements Serializable {
 
 
     public Double simulateOneDayMovement(){
-        this.angle = this.angle >= EXTREME ? this.angle -= EXTREME : this.angle;
-        this.angle = this.angle <= -EXTREME ? this.angle += EXTREME : this.angle;
+        if( this.angle >= EXTREME ) this.angle -= EXTREME ;
+        if( this.angle <= -EXTREME ) this.angle += EXTREME ;
         this.angle += this.angularVelocity;
         return this.angle;
     }

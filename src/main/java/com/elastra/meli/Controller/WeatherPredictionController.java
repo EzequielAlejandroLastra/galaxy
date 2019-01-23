@@ -16,7 +16,7 @@ public class WeatherPredictionController {
     WeatherPredictionService weatherPredictionService;
 
 
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,path = "/get-prediction/{day}")
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, path = "/get-prediction/{day}")
     public String findWeatherpredictionByDay(@PathVariable(value = "day") Long day) throws Exception {
         if (day != null) return weatherPredictionService.findPredictionByDay(day).toString();
         else {
@@ -25,7 +25,12 @@ public class WeatherPredictionController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/generate-predictions/{years}")
-    public void generatePredictions(@PathVariable int years) throws Exception {
-        weatherPredictionService.calculateAndPesistPredictions(years);
+    public String generatePredictions(@PathVariable int years) throws Exception {
+        return weatherPredictionService.calculateAndPesistPredictions(years);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/clean-predictions")
+    public String cleanAllPrediction() throws Exception {
+        return weatherPredictionService.cleanPredictions();
     }
 }

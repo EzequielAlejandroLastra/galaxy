@@ -4,6 +4,7 @@ import com.elastra.meli.Model.*;
 import com.elastra.meli.Model.Enum.ConditionType;
 import com.elastra.meli.Processor.PredictAndPersistProccesor;
 import com.elastra.meli.Repository.GalaxyRepository;
+import com.elastra.meli.Repository.PlanetPositionRepository;
 import com.elastra.meli.Repository.PlanetRepository;
 import com.elastra.meli.Repository.WeatherPredictionRepository;
 import com.elastra.meli.Service.WeatherPredictionService;
@@ -37,6 +38,9 @@ public class WeatherPredictionServiceImpl implements WeatherPredictionService {
     PlanetRepository planetRepository;
 
     @Autowired
+    PlanetPositionRepository planetPositionRepository;
+
+    @Autowired
     ThreadPoolTaskExecutor executor;
 
     @Autowired
@@ -51,8 +55,13 @@ public class WeatherPredictionServiceImpl implements WeatherPredictionService {
     }
 
     @Override
-    public WeatherPrediction findPredictionByDay(Long day) {
-        return weatherPredictionRepository.findByDay(day);
+    public WeatherPrediction findPredictionByDay(Long day)  {
+        try {
+            return weatherPredictionRepository.findByDay(day);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -74,12 +83,15 @@ public class WeatherPredictionServiceImpl implements WeatherPredictionService {
     @Override
     public String calculateAndPesistPredictions(int years) {
         try {
+            weatherPredictionRepository.cleanPredictions();
+
             Planet ferengi = planetRepository.findOne(FERENGI);
             Planet vulcano = planetRepository.findOne(VULCANO);
             Planet betasoide = planetRepository.findOne(BETASOIDE);
             executor.initialize();
 
-            IntStream.range(1,years).forEach(i -> {
+            IntStream.range(1,years + 1).forEach(i -> {
+                System.out.println("Inicia año " + i);
                 PredictAndPersistProccesor proccesor = procesorBuilder(ferengi, vulcano, betasoide, i);
 
                 executor.execute(proccesor);
@@ -98,7 +110,18 @@ public class WeatherPredictionServiceImpl implements WeatherPredictionService {
 
     @Override
     public List<WeatherPrediction> getPredictions() {
-        return weatherPredictionRepository.findAll();
+        return weatherPredictionRepository.findAllByOrderByDayAsc();
+    }
+
+    @Override
+    public String cleanPredictions() {
+        try {
+            planetPositionRepository.cleanPositions();
+            weatherPredictionRepository.cleanPredictions();
+            return "Se limpiaron las tablas Exitosamente";
+        }catch (Exception e){
+           return "Debido a un error no se pudieron limpiar las tablas para generar prediciones, Contacte al desarrollador";
+        }
     }
 
     private PredictAndPersistProccesor procesorBuilder(Planet ferengi, Planet vulcano, Planet betasoide, int i) {
