@@ -26,8 +26,8 @@ public class PlanetPositionServiceTest {
     @Autowired
     WeatherPredictionService weatherPredictionService;
 
-    /*
-    @Test*/
+
+    @Test
     public void when_run_calculateAndPesistPredictions_with_ten_years_should_persist_3650_registers(){
 
         int year = 10;
