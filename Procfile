@@ -1,1 +1,1 @@
-web: java -Dserver.port$PORT $JAVA_OPTS -jar build/libs/meli-0.0.1-SNAPSHOT.war
+web: java $JAVA_OPTS -jar build/libs/meli-0.0.1-SNAPSHOT.war --port $PORT --session-store memcache
