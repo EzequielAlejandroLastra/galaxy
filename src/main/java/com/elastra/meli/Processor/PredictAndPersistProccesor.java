@@ -39,7 +39,6 @@ public class PredictAndPersistProccesor implements Runnable, Cloneable {
 
     @Override
     public void run() {
-        logger.info(" EXECUTE RUN()");
         List<PlanetPosition> planetPositionList = new ArrayList<PlanetPosition>();
         List<WeatherPrediction> predictionList = new ArrayList<WeatherPrediction>();
 

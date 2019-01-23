@@ -91,7 +91,7 @@ public class WeatherPredictionServiceImpl implements WeatherPredictionService {
             executor.initialize();
 
             IntStream.range(1,years + 1).forEach(i -> {
-                System.out.println("Inicia año " + i);
+
                 PredictAndPersistProccesor proccesor = procesorBuilder(ferengi, vulcano, betasoide, i);
 
                 executor.execute(proccesor);
