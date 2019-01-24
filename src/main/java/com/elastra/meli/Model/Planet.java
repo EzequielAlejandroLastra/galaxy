@@ -1,6 +1,5 @@
 package com.elastra.meli.Model;
 
-import com.elastra.meli.Processor.PredictAndPersistProccesor;
 import com.elastra.meli.Utils.RoundingUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +13,7 @@ public class Planet implements Serializable, Cloneable {
 
     private static Double EXTREME = 360D;
     private static Double DAY_OF_YEAR = 365D;
-    private static final Logger logger = LoggerFactory.getLogger(PredictAndPersistProccesor.class);
+    private static final Logger logger = LoggerFactory.getLogger(Planet.class);
 
     @Id
     @Column(name = "PLANET_ID")
