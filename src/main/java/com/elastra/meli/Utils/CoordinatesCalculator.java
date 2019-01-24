@@ -57,6 +57,12 @@ public interface CoordinatesCalculator {
         return (p1, p2, p3) -> ((p1.getAxisX() - p3.getAxisX()) * (p2.getAxisY() - p3.getAxisY())) - ((p1.getAxisY() - p3.getAxisY()) * (p2.getAxisX() - p3.getAxisX()));
     }
 
+
+    /**
+     * CALCULO DEL AREA DE UN TRIANGULO
+     * @return  Devuelve un double que representa el valor del area del triangulo.
+     * @author Ezequiel Lastra
+     */
     static CoordinatesCalculator calculateTriangleArea() {
         return (p1, p2, p3) -> {
 
