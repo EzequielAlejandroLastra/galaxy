@@ -92,7 +92,7 @@ public class WeatherPredictionServiceImpl implements WeatherPredictionService {
 
             IntStream.range(1,years + 1).forEach(i -> {
 
-                PredictAndPersistProccesor proccesor = procesorBuilder(ferengi, vulcano, betasoide, i);
+                PredictAndPersistProccesor proccesor = procesorBuilder(ferengi.clone(), vulcano.clone(), betasoide.clone(), i);
 
                 executor.execute(proccesor);
             });

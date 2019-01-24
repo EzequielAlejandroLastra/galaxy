@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity(name = "PLANET")
-public class Planet implements Serializable {
+public class Planet implements Serializable, Cloneable {
 
     private static Double EXTREME = 360D;
     private static Double DAY_OF_YEAR = 365D;
@@ -72,6 +72,16 @@ public class Planet implements Serializable {
 
     public void setAngle(Double angle) {
         this.angle = angle;
+    }
+
+
+    public Planet clone() {
+        try {
+            return (Planet) super.clone();
+        } catch (CloneNotSupportedException e) {
+            logger.error("Error al clonar el objeto Planet: ", e);
+            return null;
+        }
     }
 
 
