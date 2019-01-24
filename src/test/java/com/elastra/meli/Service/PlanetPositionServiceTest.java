@@ -28,7 +28,7 @@ public class PlanetPositionServiceTest {
 
 
     @Test
-    public void when_run_calculateAndPesistPredictions_with_ten_years_should_persist_3650_registers(){
+    public void when_run_calculateAndPesistPredictions_with_ten_years_should_persist_10950_registers(){
 
         int year = 10;
         weatherPredictionService.calculateAndPesistPredictions(year);
