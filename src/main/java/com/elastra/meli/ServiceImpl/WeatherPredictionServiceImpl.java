@@ -100,12 +100,10 @@ public class WeatherPredictionServiceImpl implements WeatherPredictionService {
 
             Double maxPerimeter = weatherPredictionRepository.findMaxPerimeter();
             weatherPredictionRepository.updateConditionByPerimeter(maxPerimeter);
-        }catch (Exception e){
-            return "Proceso de Generacion de Predicciones Fallo, Por favor comuniquese con el Desarrollador";
-        }finally {
             return  "Proceso Finalizado Exitosamente!!!";
+        }catch (Exception e) {
+            return "Proceso de Generacion de Predicciones Fallo, Por favor comuniquese con el Desarrollador";
         }
-
     }
 
     @Override
