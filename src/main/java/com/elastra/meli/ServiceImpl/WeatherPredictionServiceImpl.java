@@ -116,10 +116,10 @@ public class WeatherPredictionServiceImpl implements WeatherPredictionService {
         try {
             planetPositionRepository.cleanPositions();
             weatherPredictionRepository.cleanPredictions();
-            return "Se limpiaron las tablas Exitosamente";
         }catch (Exception e){
            return "Debido a un error no se pudieron limpiar las tablas para generar prediciones, Contacte al desarrollador";
         }
+        return "Se limpiaron las tablas Exitosamente";
     }
 
     private PredictAndPersistProccesor procesorBuilder(Planet ferengi, Planet vulcano, Planet betasoide, int i) {
